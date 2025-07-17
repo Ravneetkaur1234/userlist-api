@@ -59,6 +59,24 @@ router.route("/")
             .catch((err) => res.status(400).json("Error: " +err));
     })
 
+    .post((req,res) => {
+        const id = req.body.id;
+        const email = req.body.email;
+        const username = req.body.username;
+
+        const newUser = new User({
+            id,
+            email,
+            username
+        });
+
+        newUser 
+            .save()
+            .then(() => res.json("New User added!"))
+            .catch((err) => res.status(400).json("Error: " +err));
+    });
+    
+
 router.route("/newuser")
     .get((req, res) => {
         res.send("This is the add User page")
